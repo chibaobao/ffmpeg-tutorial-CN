@@ -1,5 +1,5 @@
 中文版ffmpeg-tutorial，翻译并加入一些注释
-#ffmpeg信息
+# ffmpeg信息
 ```
 ffmpeg version 3.3.git Copyright (c) 2000-2017 the FFmpeg developers
 built with gcc 5.4.0 (Ubuntu 5.4.0-6ubuntu1~16.04.4) 20160609
