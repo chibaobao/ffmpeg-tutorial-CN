@@ -12,4 +12,6 @@ libavfilter     6. 84.101 /  6. 84.101
 libswscale      4.  7.101 /  4.  7.101
 libswresample   2.  8.100 /  2.  8.100
 ```
+# tutorial01.c
 
+从视频文件中读出前五帧数据写成ppm格式图片保存到当前目录
