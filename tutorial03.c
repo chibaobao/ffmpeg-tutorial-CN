@@ -106,7 +106,9 @@ static int packet_queue_get(PacketQueue *q, AVPacket *pkt, int block)
 		else
 		{
 			//解锁，阻塞等待数据到来。
-			SDL_CondWait(q->cond, q->mutex); //FIXME:现在是单线程，为什么整个程序并没有阻塞
+            SDL_CondWait(q->cond, q->mutex); /*FIXME:  现在是单线程，为什么整个程序并没有阻塞
+                                               已经解决：音频播放是另一个线程并非单线程*/
+
 		}
 	}
 	SDL_UnlockMutex(q->mutex);
@@ -296,7 +298,7 @@ int main(int argc, char *argv[]) {
 	wanted_spec.channels = aCodecCtx->channels;
 	wanted_spec.silence = 0;
 	wanted_spec.samples = SDL_AUDIO_BUFFER_SIZE;
-	wanted_spec.callback = audio_callback;//音频毁掉函数
+    wanted_spec.callback = audio_callback;//音频回调函数
 	wanted_spec.userdata = aCodecCtx;
 
 	if(SDL_OpenAudio(&wanted_spec, &spec) < 0) {
@@ -308,6 +310,7 @@ int main(int argc, char *argv[]) {
 
 	// 初始化队列
 	packet_queue_init(&audioq);
+    //如果参数是非0值就暂停，如果是0值就播放。
 	SDL_PauseAudio(0);
 
 	// 视频解码器context
