@@ -133,7 +133,7 @@ int main(int argc, char *argv[]) {
 
       // 判断是否解码到数据
       if(frameFinished) {
-        // yuv转rgb
+        // 转rgb
         sws_scale
         (
             sws_ctx,
